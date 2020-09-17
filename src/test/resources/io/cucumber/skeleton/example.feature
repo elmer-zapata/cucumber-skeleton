@@ -1,6 +1,8 @@
 Feature: Pago planillas
-  Scenario: Como usuario puedo dar de alta un nuevo empleado
-    Given estoy usando el sistema de planillas
-    When estoy ingresando un nuevo empleado
-    Then espero que el usuario haya sido creado y verlo en la lista de empleados
-    And verlo en la lista de empleados
+
+
+  Scenario: Un nuevo comercio desea afiliarse al programa pago planilla
+    Given un nuevo comercio que no esta afiliado al programa
+    When el comercio se registra al programa
+    Then espera el comercio debera tener el estatus afiliado
+
