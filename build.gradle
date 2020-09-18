@@ -5,6 +5,24 @@ dependencies {
     testImplementation 'io.cucumber:cucumber-junit:6.7.0'
 }
 
+
 repositories {
     mavenCentral()
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources/io/cucumber/skeleton'] + [category]
+        }
+    }
 }
